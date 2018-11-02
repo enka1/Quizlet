@@ -1,0 +1,6 @@
+type User {
+    _id: MongoID
+    username: String
+    email: String
+    birthday: Date
+}

@@ -1,0 +1,12 @@
+# import * from '../users/type.graphql'
+
+type flashCards {
+    term: String
+    definition: String
+}
+
+type StudySet {
+    _id: MongoID
+    creator: User
+    flashCards: []
+}

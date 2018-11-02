@@ -1,2 +1,2 @@
-scalar Date
+scalar DateTime
 scalar MongoID

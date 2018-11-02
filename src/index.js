@@ -4,9 +4,10 @@ import morgan from 'morgan'
 import helmet from 'helmet'
 import compression from 'compression'
 
-import schema from 'graphql'
+import schema from './graphql'
 import { connectToMongoDB } from './models'
 
+require('dotenv').config()
 connectToMongoDB()
 
 const app = express()

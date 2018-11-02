@@ -1,12 +1,28 @@
+# import * from '../scalar/scalar.graphql'
 # import * from '../users/type.graphql'
 
-type flashCards {
+type FlashCard {
     term: String
     definition: String
 }
 
 type StudySet {
     _id: MongoID
+    name: String
+    password: String
     creator: User
-    flashCards: []
+    flashCards: [FlashCard]
+}
+
+input StudySetInput {
+    _id: String
+    name: String
+    password: String
+    creator: String
+    flashCards: [FlashCard]
+}
+
+enum StudySetSortCases {
+    name_ASC
+    name_DESC
 }

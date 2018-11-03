@@ -2,5 +2,15 @@ type User {
     _id: MongoID
     username: String
     email: String
-    birthday: DateTime
+    token: String
+    birthday: TimeStamp
+}
+
+input UserInput {
+     _id: MongoID
+    username: String
+    password: String
+    email: String
+    birthday: TimeStamp
+    token: String
 }

@@ -14,7 +14,7 @@ const app = express()
 
 app.use(helmet())
 app.use(compression())
-app.use(morgan())
+app.use(morgan("short"))
 app.use('/graphql', graphQLServer({
     schema,
     graphiql: true,

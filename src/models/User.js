@@ -14,6 +14,9 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String
     },
+    avatar: {
+        type: String
+    },
     birthday: {
         type: Date
     }
@@ -22,7 +25,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.pre('save', async function(next) {
     if (this.isModified('password')) {
         let salt = await bcrypt.genSalt(10)
-        this.password = bcrypt.hash(this.password, salt)
+        this.password = await bcrypt.hash(this.password, salt)
     }
     next()
 })
@@ -37,16 +40,34 @@ UserSchema.pre('remove', function(next) {
 })
 
 UserSchema.methods.generateToken = function() {
-    return jwt.sign({ _id: this._id }, process.env.BCRYPT_SECRET)
+    return jwt.sign({ _id: this._id }, process.env.JWT_SECRET)
 }
 
-UserSchema.methods.isAuthenticate = function(token) {
-    return jwt.verify(token, process.env.BCRYPT_SECRET, (err, decoded) => {
-        if (err) {
-            return Promise.reject()
-        }
-        return Promise.resolve(decoded)
-    })
+UserSchema.statics.findByCredential = async function(username, password) {
+    let user = await UserModel.findOne({ username })
+    if (user)
+        if (await bcrypt.compare(password, user.password))
+            return {
+                token: user.generateToken()
+            }
+    throw Error("Username or Password is incorrect !")
 }
 
-export default mongoose.model('User', UserSchema)
+UserSchema.statics.findByToken = async function(token) {
+    try {
+        let { _id } = jwt.verify(token, process.env.JWT_SECRET)
+        return await UserModel.findById(_id)
+    }
+    catch (error) {
+        throw Error("Token is invalid !")
+    }
+}
+
+UserSchema.methods.toJSON = function() {
+    let { username, email, avatar, birthday } = this
+    return { username, email, avatar, birthday }
+}
+
+const UserModel = mongoose.model('User', UserSchema)
+
+export default UserModel

@@ -12,6 +12,12 @@ type StudySet {
     password: String
     creator: User
     flashCards: [FlashCard]
+    createdAt: TimeStamp
+}
+
+input FlashCardInput {
+    term: String
+    definition: String
 }
 
 input StudySetInput {
@@ -19,7 +25,8 @@ input StudySetInput {
     name: String
     password: String
     creator: String
-    flashCards: [FlashCard]
+    flashCards: [FlashCardInput]
+    createdAt: TimeStamp
 }
 
 enum StudySetSortCases {

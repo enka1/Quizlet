@@ -1,0 +1,11 @@
+# import * from './type.graphql'
+
+type Query {
+    authUser(user: UserInput = {}): User
+    user(id: String): User
+    users(criteria: UserInput = {}): [User]
+}
+
+type Mutation {
+    signUp(user: UserInput = {}, limit: Int, skip: Int): User
+}

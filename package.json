@@ -6,17 +6,21 @@
   "scripts": {
     "start": "babel-watch src",
     "build": "babel src -d server --copy-files",
-    "clean": "rm -rf server"
+    "clean": "rm -rf server",
+    "test": "jest --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-watch": "^2.0.7",
+    "graphql-tag": "^2.10.0",
+    "jest-cli": "^23.6.0",
     "nodemon": "^1.18.5"
   },
   "dependencies": {
@@ -29,12 +33,12 @@
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
     "graphql-import": "^0.7.1",
-    "graphql-iso-date": "^3.6.1",
     "graphql-tools": "^4.0.3",
     "helmet": "^3.14.0",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.8",
     "morgan": "^1.9.1",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "validator": "^10.8.0"
   }
 }

@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import { StudySet } from './'
+import { Term } from './'
 
 const UserSchema = new mongoose.Schema({
     email: {
@@ -19,7 +19,14 @@ const UserSchema = new mongoose.Schema({
     },
     birthday: {
         type: Date
-    }
+    },
+    terms: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Term'
+    }],
+    // studyActivities: [{
+
+    // }]
 })
 
 UserSchema.pre('save', async function(next) {
@@ -31,7 +38,7 @@ UserSchema.pre('save', async function(next) {
 })
 
 UserSchema.pre('remove', function(next) {
-    StudySet.deleteMany({
+    Term.deleteMany({
         creator: {
             $eq: this._id
         }

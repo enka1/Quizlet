@@ -1,16 +1,16 @@
 import mongoose from 'mongoose'
 
 const FlashCardSchema = new mongoose.Schema({
-    studySet: {
+    term: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'StudySet'
+        ref: 'Term'
     },
-    term: {
+    question: {
         type: String,
         required: true
     },
-    definition: {
+    answer: {
         type: String,
         required: true
     }

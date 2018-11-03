@@ -1,9 +1,13 @@
+# import * from '../terms/type.graphql'
+
 type User {
     _id: MongoID
     username: String
     email: String
-    token: String
     birthday: TimeStamp
+    avatar: String
+    terms: [Term]
+    token: String
 }
 
 input UserInput {
@@ -12,5 +16,6 @@ input UserInput {
     password: String
     email: String
     birthday: TimeStamp
+    avatar: String
     token: String
 }

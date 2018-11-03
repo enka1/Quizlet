@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 
-import { FlashCard } from './'
+import { FlashCard } from '.'
 
-const StudySetSchema = new mongoose.Schema({
+const TermSchema = new mongoose.Schema({
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -19,14 +19,17 @@ const StudySetSchema = new mongoose.Schema({
     flashCards: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'FlashCard'
-    }]
+    }],
+    createdAt: {
+        type: Date
+    }
 })
 
-StudySetSchema.virtual('totalTerms').get(function() {
+TermSchema.virtual('totalFashCards').get(function() {
     return this.flashCards.length
 })
 
-StudySetSchema.pre('save', async function(next) {
+TermSchema.pre('save', async function(next) {
     if (this.isModified('password')) {
         let salt = await bcrypt.genSalt(10)
         this.password = await bcrypt.hash(this.password, salt)
@@ -34,13 +37,13 @@ StudySetSchema.pre('save', async function(next) {
     next()
 })
 
-StudySetSchema.pre('remove', function(next) {
+TermSchema.pre('remove', function(next) {
     FlashCard.deleteMany({
-        studySet: {
+        term: {
             $eq: this._id
         }
     })
     next()
 })
 
-export default mongoose.model('StudySet', StudySetSchema)
+export default mongoose.model('Term', TermSchema)

@@ -6,7 +6,7 @@ type FlashCard {
     definition: String
 }
 
-type StudySet {
+type Term {
     _id: MongoID
     name: String
     password: String
@@ -16,11 +16,11 @@ type StudySet {
 }
 
 input FlashCardInput {
-    term: String
-    definition: String
+    question: String
+    answer: String
 }
 
-input StudySetInput {
+input TermInput {
     _id: String
     name: String
     password: String
@@ -29,7 +29,7 @@ input StudySetInput {
     createdAt: TimeStamp
 }
 
-enum StudySetSortCases {
+enum TermSortCases {
     name_ASC
     name_DESC
 }

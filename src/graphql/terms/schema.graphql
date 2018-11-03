@@ -1,0 +1,11 @@
+# import * from './type.graphql'
+
+type Query {
+    term(id: String): Term
+    terms(criteria: TermInput, limit: Int, skip: Int, sort: TermSortCases): [Term]
+}
+type Mutation {
+    createNewTerm: Term
+    updateTerm: Term
+    deleteTerm: Term
+}

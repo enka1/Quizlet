@@ -1,15 +1,15 @@
 import Scalar from './scalar/resolve'
-import { Query as StudySetQuery, Mutation as StudySetMutation } from './studySets/resolve'
+import { Query as TermQuery, Mutation as TermMutation } from './terms/resolve'
 import { Query as UserQuery, Mutation as UserMutation } from './users/resolve'
 
 export default {
     ...Scalar,
     Query: {
         ...UserQuery,
-        ...StudySetQuery
+        ...TermQuery
     },
     Mutation: {
-        ...StudySetMutation,
+        ...TermMutation,
         ...UserMutation
     }
 }

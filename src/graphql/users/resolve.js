@@ -1,11 +1,14 @@
 import { User } from '../../models'
-import { signUpValidate } from './validate'
+import { signUpDataValidation } from '../../middleware/users'
 
 function modifyUserCriteria(criteria) {
     let { username } = criteria
     let modifyUserCriteria = {}
     if (username)
-        modifyUserCriteria = { ...modifyUserCriteria, username: new RegExp(username, 'i') }
+        modifyUserCriteria = {
+            ...modifyUserCriteria,
+            username: new RegExp(username, 'i')
+        }
     return modifyUserCriteria
 }
 
@@ -29,7 +32,7 @@ export const Query = {
 
 export const Mutation = {
     async signUp(_, { user }) {
-        await signUpValidate(user)
+        await signUpDataValidation(user)
         let newUser = await User.create(user)
         return {
             _id: newUser._id,

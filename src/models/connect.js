@@ -6,4 +6,5 @@ export default () => {
         console.log(err)
         process.exit(0)
     })
+    mongoose.set('debug', true)
 }

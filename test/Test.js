@@ -1,6 +1,6 @@
 import { execute } from 'graphql'
 
-import schema from '../graphql'
+import schema from '../src/graphql'
 
 export class Test {
     constructor(query, variables, rootValue, contextValue) {

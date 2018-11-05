@@ -5,14 +5,13 @@ import bcrypt from 'bcrypt'
 import { connectToMongoDB, closeConnectToMongoDB, dropCollection } from '../MongoDBEnviroment'
 import { getEnvironmentParameter } from '../Environment'
 import { Test } from '../Test';
-import { User } from '../../models'
+import { User } from '../../src/models'
 
 let variables = {
     user: {
         username: "marumi",
-        password: "marumi123",
-        email: "nhithanh123vnn@gmail.com",
-        birthday: new Date(1998, 9, 19).getTime()
+        password: "Marumi123",
+        email: "nhithanh123vnn@gmail.com"
     }
 }
 let query = gql `
@@ -27,7 +26,7 @@ mutation($user: UserInput) {
 beforeAll(() => {
     getEnvironmentParameter()
     connectToMongoDB()
-    dropCollection('User')
+    dropCollection('users')
 })
 afterAll(() => {
     closeConnectToMongoDB()
@@ -47,9 +46,7 @@ describe('Sign Up GraphQL Test:', async () => {
 
     test('Password should be hash when save to database.', async () => {
         let { password } = await User.findById(testID)
-        console.log(password)
-        let isMatch = await bcrypt.compare('marumi123', password)
+        let isMatch = await bcrypt.compare('Marumi123', password)
         expect(isMatch).toBe(true)
     })
-    test('User can login with new account.')
 })

@@ -3,9 +3,9 @@
 type Query {
     authUser(user: UserInput = {}): User
     user(id: String): User
-    users(criteria: UserInput = {}): [User]
+    users(criteria: UserInput = {}, skip: Int, limit: Int): [User]
 }
 
 type Mutation {
-    signUp(user: UserInput = {}, limit: Int, skip: Int): User
+    signUp(user: UserInput = {}): User
 }

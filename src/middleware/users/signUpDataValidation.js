@@ -2,7 +2,7 @@ import { isEmail } from 'validator'
 
 import { User } from '../../models'
 
-const signUpValidate = async (user) => {
+export default async (user) => {
     let { username, email, password } = user
     if (!username)
         throw Error("Username is required !")
@@ -25,5 +25,3 @@ const signUpValidate = async (user) => {
     else if (!isEmail(email))
         throw Error("Not a valid email !")
 }
-
-export { signUpValidate }

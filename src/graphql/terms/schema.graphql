@@ -5,7 +5,8 @@ type Query {
     terms(criteria: TermInput, limit: Int, skip: Int, sort: TermSortCases): [Term]
 }
 type Mutation {
-    createNewTerm: Term
-    updateTerm: Term
+    createNewTerm(term: TermInput): Term
+    updateTerm(newFlashCards: [FlashCardInput], removeFlashCards: [String], 
+        termID: String, token: String, name: String, password: String): Term
     deleteTerm: Term
 }

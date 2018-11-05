@@ -2,8 +2,9 @@
 # import * from '../users/type.graphql'
 
 type FlashCard {
-    term: String
-    definition: String
+    _id: String
+    question: String
+    answer: String
 }
 
 type Term {

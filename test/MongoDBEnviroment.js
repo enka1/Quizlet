@@ -10,7 +10,7 @@ const closeConnectToMongoDB = () => {
 }
 
 const dropCollection = (collectionName) => {
-    mongoose.connection.dropCollection(collectionName).catch(() => null)
+    mongoose.connection.dropCollection(collectionName)
 }
 
 export { connectToMongoDB, closeConnectToMongoDB, dropCollection }
